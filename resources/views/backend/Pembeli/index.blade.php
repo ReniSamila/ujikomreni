@@ -21,34 +21,41 @@
                                 <th>Alamat Pembeli</th>
                                 <th>Telpon Pembeli</th>
                                 <th>Pembeli Hp</th>
-                                <th clospan="3" style="text-align: center;">Aksi</th>
+                                <th style="text-align: center;">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                @php $no =1; @endphp
-                @foreach($pembeli as $data)
-                <tr>
-                    <td>{{ $no++ }}</td>
-                    <td>{{ $data->no_ktp_pembeli }}</td>
-                    <td>{{ $data->nama_pembeli }}</td>
-                    <td>{{ $data->alamat_pembeli }}</td>
-                    <td>{{ $data->telpon_pembeli }}</td>
-                    <td>{{ $data->pembeli_hp }}</td>
+                        @php $no = 1; @endphp
+                            @foreach ($pembeli as $data)
+                            <tr>
+                                <td>{{ $no++ }}</td>
+                                <td>{{ $data->no_ktp_pembeli }}</td>
+                                <td>{{ $data->nama_pembeli }}</td>
+                                <td>{{ $data->alamat_pembeli }}</td>
+                                <td>{{ $data->telpon_pembeli }}</td>
+                                <td>{{ $data->pembeli_hp }}</td>
+                                <td style="text-align: center;">
+                                    <form action="{{route('pembeli.destroy', $data->id)}}" method="post">
+                                        {{csrf_field()}}
+                                    <a href="{{route('pembeli.edit', $data->id)}}"
+                                        class="zmdi zmdi-edit btn btn-warning btn-rounded btn-floating "> Edit
+                                    </a>
+                                    <a href="{{route('pembeli.show', $data->id) }}"
+                                        class="zmdi zmdi-eye btn btn-success btn-rounded btn-floating "> Show
+                                    </a>
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <button type="submit" class="zmdi zmdi-delete btn-rounded btn-floating btn btn-dangerbtn btn-danger "> Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
 
-                    <td><a href="{{ route('pembeli.edit', $data->id) }}" class="btn btn-warning">Edit</a></td>
-                    <td><a href="{{ route('pembeli.show', $data->id) }}" class="btn btn-success">Show</a></td>
-                    <td><form action="{{ route('pembeli.destroy', $data->id) }}" method="post">
-                    {{ csrf_field() }}  
-                    <input type="hidden" name="_method" value="DELETE">
-                        <button type=="submit" class="zmdi zmdi-delete btn-rounded btn-floating btn btn-dangerbtn btn-danger btn-outline">Delete</button>
-                    </form>
-                    </td>
-                </tr>
-                @endforeach
-                </table>
-            </tbody>
+
+                </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 @endsection
